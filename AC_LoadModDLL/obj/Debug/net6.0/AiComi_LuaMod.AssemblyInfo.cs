@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("AiComi_LuaMod")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0fd99a5b1ffdbe8f0590059b3e017ce212f18875")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e6758d6f96aa6e7c9222dbfbdd497dfb87bfde38")]
 [assembly: System.Reflection.AssemblyProductAttribute("AiComi_LuaMod")]
 [assembly: System.Reflection.AssemblyTitleAttribute("AiComi_LuaMod")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

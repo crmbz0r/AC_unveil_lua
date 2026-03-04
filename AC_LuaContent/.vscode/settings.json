@@ -1,0 +1,169 @@
+﻿{
+    // =========================================================
+    //  sumneko.lua  –  primärer Language Server
+    // =========================================================
+
+    // Lua-Version die xLua intern nutzt
+    "Lua.runtime.version": "Lua 5.3",
+
+    // Stubs-Ordner einbinden: CS.*, xlua, Unity-API
+    "Lua.workspace.library": [
+        "${workspaceFolder}/stubs"
+    ],
+
+    // Bekannte xLua/Unity Globals damit keine false-positive Warnings kommen
+    "Lua.diagnostics.globals": [
+        "CS",
+        "xlua",
+        "typeof",
+        "print",
+        "unpack",
+        "coroutine",
+        "util",
+        "cs_coroutine",
+        "message_box",
+        "profiler",
+        "tdr"
+    ],
+
+    // Checks die bei xLua-Projekten immer fälschlicherweise feuern – aus
+    "Lua.diagnostics.disable": [
+        "undefined-global",
+        "lowercase-global",
+        "missing-return"
+    ],
+
+    // Encoding
+    "Lua.runtime.fileEncoding": "utf8",
+
+    // Pfad-Trenner für require ('/' statt '\\')
+    "Lua.runtime.pathStrict": false,
+
+    // require()-Pfade: xLua nutzt 'modul' und 'ordner.modul'
+    "Lua.runtime.path": [
+        "?.lua",
+        "?/init.lua",
+        "stubs/?.lua"
+    ],
+
+    // Workspace-Scan: alle .lua Dateien im Projekt einlesen
+    "Lua.workspace.checkThirdParty": false,
+    "Lua.workspace.ignoreDir": [
+        ".vscode",
+        "node_modules"
+    ],
+
+    // IntelliSense
+    "Lua.completion.enable": true,
+    "Lua.completion.autoRequire": true,
+    "Lua.completion.callSnippet": "Replace",
+    "Lua.completion.keywordSnippet": "Replace",
+    "Lua.completion.showParams": true,
+    "Lua.completion.displayContext": 3,
+
+    // Hover-Infos: zeigt Signaturen und Kommentare
+    "Lua.hover.enable": true,
+    "Lua.hover.enumsLimit": 20,
+    "Lua.hover.expandAlias": true,
+    "Lua.hover.previewFields": 30,
+    "Lua.hover.viewNumber": true,
+    "Lua.hover.viewString": true,
+    "Lua.hover.viewStringMax": 1000,
+
+    // Signatur-Hilfe beim Tippen
+    "Lua.signatureHelp.enable": true,
+
+    // Semantisches Highlighting (Globals in anderer Farbe)
+    "Lua.semantic.enable": true,
+    "Lua.semantic.variable": true,
+    "Lua.semantic.annotation": true,
+    "Lua.semantic.keyword": true,
+
+    // Hints (zeigt Parameternamen inline an)
+    "Lua.hint.enable": true,
+    "Lua.hint.paramName": "All",
+    "Lua.hint.paramType": true,
+    "Lua.hint.returnType": true,
+    "Lua.hint.setType": true,
+    "Lua.hint.arrayIndex": "Enable",
+
+    // Code-Format (kompatibel mit LuaHelper-Format)
+    "Lua.format.enable": true,
+    "Lua.format.defaultConfig": {
+        "indent_style": "space",
+        "indent_size": "4",
+        "quote_style": "single",
+        "call_arg_parentheses": "keep",
+        "column_limit": "120",
+        "continuation_indent_size": "4"
+    },
+
+    // Type checking – warn bei offensichtlichen Fehlern, aber nicht zu streng
+    "Lua.type.castNumberToInteger": true,
+    "Lua.type.weakNilCheck": true,
+    "Lua.type.weakUnionCheck": true,
+
+    // =========================================================
+    //  LuaHelper (Tencent)  –  LSP deaktiviert, Debugger bleibt
+    // =========================================================
+
+    // LSP-Features aus – sumneko übernimmt das
+    "luahelper.checkOnFileOpen": false,
+    "luahelper.checkOnTyping": false,
+    "luahelper.showFileErrorTip": false,
+    "luahelper.enableCheckProject": false,
+
+    // Tencent-Debugger aktiv lassen (nützlich für späteres Debugging)
+    "luahelper.debugger.enable": true,
+
+    // LuaHelper: dieselbe Lua-Version
+    "luahelper.luaVersion": "Lua5.3",
+
+    // LuaHelper: Workspace einschränken damit er nicht mit sumneko konkurriert
+    "luahelper.mainDir": "${workspaceFolder}",
+    "luahelper.requirePathSeparator": ".",
+
+    // LuaHelper Checks die sonst doppelt feuern würden – alle aus
+    "luahelper.check_GlobalVarDef": false,
+    "luahelper.check_NonDefine": false,
+    "luahelper.check_NonLocalDefine": false,
+    "luahelper.check_AnnotateType": false,
+    "luahelper.check_ArgCount": false,
+    "luahelper.check_AssignStmt": false,
+    "luahelper.check_IfNotVar": false,
+    "luahelper.check_MethodParamNum": false,
+    "luahelper.check_BinaryOpNonTableMember": false,
+    "luahelper.check_StringOpNumber": false,
+    "luahelper.check_LocalNoUse": false,
+    "luahelper.check_FormatString": false,
+    "luahelper.check_DuplicateKeyTable": false,
+    "luahelper.check_SnippetComplete": false,
+
+    // =========================================================
+    //  Allgemeines Editor-Setup
+    // =========================================================
+
+    // Dateizuordnung: .lua.lua (wie die extrahierten Assets heißen) auch als Lua behandeln
+    "files.associations": {
+        "*.lua": "lua",
+        "*.lua.lua": "lua"
+    },
+
+    // Zeilenenden und Encoding
+    "files.eol": "\n",
+    "files.encoding": "utf8",
+
+    // Suche: dekompilierte CS-Dateien und Outputs ausblenden
+    "search.exclude": {
+        "**/node_modules": true,
+        "**/*.dll": true
+    },
+
+    // Beim Speichern formatieren
+    "editor.formatOnSave": true,
+    "[lua]": {
+        "editor.defaultFormatter": "sumneko.lua",
+        "editor.tabSize": 4,
+        "editor.insertSpaces": true
+    }
+}

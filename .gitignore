@@ -47,7 +47,7 @@ AC_unveil.code-workspace
 /AC_LoadModDLL/.vscode/**
 /AC_LoadModDLL/.specstory/**
 *.bak
-./.vscode/*
+/.vscode/**
 AC_unveil_lua.code-workspace2.code-workspace
 .vscode/launch.json
 /AC_LoadModDLL/obj/**

@@ -26,7 +26,6 @@ luac.out
 *.exp
 
 # Shared objects (inc. Windows DLLs)
-*.dll
 *.so
 *.so.*
 *.dylib
@@ -56,3 +55,5 @@ AC_unveil_lua.code-workspace2.code-workspace
 /AC_LoadModDLL/obj/Release/net6.0/**
 .specstory/.project.json
 .specstory/.what-is-this.md
+/AC_LuaContent/old
+/BepInEx

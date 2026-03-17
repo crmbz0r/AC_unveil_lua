@@ -122,7 +122,10 @@ public class LuaConsole : MonoBehaviour
     private void DrawConsole(int id)
     {
         GUILayout.Space(26f);
-        DrawRainbowTitle(new Rect(0, 2f, _consoleRect.width, 22f), "  ★ AiComi Lua Console  [F9]");
+        DrawRainbowTitle(
+            new Rect(0, 2f, _consoleRect.width, 22f),
+            " ★ AiComi Lua Console ԅ(¯﹃¯ԅ) ★   [F9]   ★ AiComi Lua Console (～￣▽￣)～ "
+        );
 
         const float TOOLBAR_H = 28f;
         const float LABEL_H = 18f;
@@ -213,7 +216,7 @@ public class LuaConsole : MonoBehaviour
 
         // ── Dialog & Reactions ──
         GUILayout.BeginVertical(GUI.skin.box);
-        GUILayout.Label("~ Dialog & Reactions", GUI.skin.label);
+        GUILayout.Label("~ Dialog / Conversation", GUI.skin.label);
         DialogSceneHooks.NoFavorLoss = DrawToggle(DialogSceneHooks.NoFavorLoss, "No Favor Loss");
         DialogSceneHooks.NoMoodLoss = DrawToggle(DialogSceneHooks.NoMoodLoss, "No Mood Loss");
         DialogSceneHooks.ForcePositiveChoice = DrawToggle(
@@ -226,24 +229,24 @@ public class LuaConsole : MonoBehaviour
 
         // ── Touch Scene ──
         GUILayout.BeginVertical(GUI.skin.box);
-        GUILayout.Label("~ Touch Scene", GUI.skin.label);
+        GUILayout.Label("~ Touch (Massage) Scene", GUI.skin.label);
 
         // Unlock all Touch Items (cursors)
         TouchSceneHooks.UnlockItems = DrawToggle(
             TouchSceneHooks.UnlockItems,
-            "Unlock All Touch Items"
+            "Unlock all massage items"
         );
 
         // No Dislike: beim Aktivieren Lua-Code ausführen
         var prevNoDislike = TouchSceneHooks.NoDislike;
-        TouchSceneHooks.NoDislike = DrawToggle(TouchSceneHooks.NoDislike, "No Dislike");
+        TouchSceneHooks.NoDislike = DrawToggle(TouchSceneHooks.NoDislike, "No Dislike React");
         if (TouchSceneHooks.NoDislike && !prevNoDislike)
         {
             RunLua(TouchSceneHooks.LuaNoDislike);
         }
 
         var prevShowNextH = TouchSceneHooks.ShowNextH;
-        TouchSceneHooks.ShowNextH = DrawToggle(TouchSceneHooks.ShowNextH, "Show Next H");
+        TouchSceneHooks.ShowNextH = DrawToggle(TouchSceneHooks.ShowNextH, "Show Next H Button");
         if (TouchSceneHooks.ShowNextH && !prevShowNextH)
         {
             TouchSceneHooks.ApplyShowNextH();
@@ -262,7 +265,7 @@ public class LuaConsole : MonoBehaviour
         else
             GUILayout.Label("  [ ] No snapshot", GUI.skin.label);
 
-        if (GUILayout.Button("  [+] Unlock All Events", _styleBtn!))
+        if (GUILayout.Button("  [+] Unlock All Events (w/ backup)", _styleBtn!))
         {
             TakeEventSnapshot();
             RunLua(

@@ -24,7 +24,7 @@ public static class TouchSceneHooks
     internal const string LuaNoDislike =
         @"
         local tc = CS.UnityEngine.Object.FindObjectOfType(typeof(CS.AC.Scene.Touch.TouchController))
-        if tc == nil then print('[NoDislike] TouchController nicht gefunden') return end
+        if tc == nil then print('[NoDislike] TouchController not yet found') return end
         xlua.private_accessible(typeof(CS.AC.Scene.Touch.TouchController))
         local s = tc._sliderMiss
         s.maxValue = 0  s.minValue = 0
@@ -36,7 +36,7 @@ public static class TouchSceneHooks
         for i=0,pp.Length-1 do
             local r=pp[i] for j=0,r.Length-1 do r[j]=100 end
         end
-        print('[NoDislike] Werte gesetzt!')
+        print('[NoDislike] values have been set!')
     ";
 
     // ── Helper ────────────────────────────────────────────────
@@ -70,7 +70,7 @@ public static class TouchSceneHooks
                     partsInfos[5].Items = MakeItems((0, 4));
                     partsInfos[6].Items = MakeItems((0, 6));
                     partsInfos[7].Items = MakeItems((0, 6));
-                    Plugin.Log.LogInfo("[TouchScene] Items freigeschaltet!");
+                    Plugin.Log.LogWarning("[TouchScene] Items / Cursors fully unlocked!");
                 }
             }
             catch (Exception ex)
@@ -85,7 +85,7 @@ public static class TouchSceneHooks
             try
             {
                 LuaConsole.RunLuaStatic(LuaNoDislike);
-                Plugin.Log.LogInfo("[TouchScene] NoDislike angewendet!");
+                Plugin.Log.LogWarning("[TouchScene] NoDislike cheat applied!");
             }
             catch (Exception ex)
             {
@@ -106,7 +106,7 @@ public static class TouchSceneHooks
 
         if (tc == null)
         {
-            Plugin.Log.LogWarning("[TouchScene] ShowNextH: TouchController nicht gefunden");
+            Plugin.Log.LogWarning("[TouchScene] ShowNextH: TouchController not (yet) found!");
             return;
         }
 
@@ -116,7 +116,7 @@ public static class TouchSceneHooks
             if (btn != null && !btn.gameObject.activeSelf)
             {
                 btn.gameObject.SetActive(true);
-                Plugin.Log.LogInfo("[TouchScene] ShowNextH: _buttonH aktiviert");
+                Plugin.Log.LogInfo("[TouchScene] ShowNextH: _buttonH made available!");
             }
         }
         catch (Exception ex)

@@ -8,7 +8,7 @@ using XLua;
 namespace AiComi_LuaMod;
 
 // ─────────────────────────────────────────────────────────────
-//  Harmony: LuaEnv abgreifen
+//  Harmony: grab LuaEnv once available
 // ─────────────────────────────────────────────────────────────
 [HarmonyPatch(typeof(ParameterContainer))]
 internal static class LuaPatch
@@ -17,11 +17,11 @@ internal static class LuaPatch
     private static void AfterBuildConditions(ParameterContainer __instance)
     {
         if (DialogSceneHooks.NoFavorLoss)
-            Plugin.Log.LogInfo("[Dialog] NoFavorLoss aktiv");
+            Plugin.Log.LogWarning("[Dialog] NoFavorLoss active");
         if (DialogSceneHooks.NoMoodLoss)
-            Plugin.Log.LogInfo("[Dialog] NoMoodLoss aktiv");
+            Plugin.Log.LogWarning("[Dialog] NoMoodLoss active");
         if (DialogSceneHooks.ForcePositiveChoice)
-            Plugin.Log.LogInfo("[Dialog] ForcePositiveChoice aktiv");
+            Plugin.Log.LogWarning("[Dialog] ForcePositiveChoice active");
 
         var luaEnv = __instance._luaEnv;
         if (luaEnv is null)
@@ -30,7 +30,7 @@ internal static class LuaPatch
             return;
         }
 
-        Plugin.Log.LogWarning("LuaEnv gefunden! Initialisiere Mod + Console...");
+        Plugin.Log.LogWarning("LuaEnv found! Initializing xLua plugin + console...");
         LuaConsole.Initialize(luaEnv);
         var modsPath =
             Path.Combine(Paths.PluginPath, "lua_scripts", "mods").Replace("\\", "/") + "/";
@@ -47,7 +47,7 @@ internal static class LuaPatch
         }
         catch (Exception ex)
         {
-            Plugin.Log.LogError($"Fehler beim Lua-Inject: {ex}");
+            Plugin.Log.LogError($"Error occured during xLua-injection: {ex}");
         }
 
         // Register UnlockItems function for Lua access
@@ -57,7 +57,7 @@ internal static class LuaPatch
                 v =>
                 {
                     TouchSceneHooks.UnlockItems = v;
-                    Plugin.Log.LogInfo($"[TouchScene] UnlockItems = {v}");
+                    Plugin.Log.LogWarning($"[TouchScene] UnlockItems = {v}");
                 }
             )
         );

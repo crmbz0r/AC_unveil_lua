@@ -18,11 +18,11 @@
 
   <ItemGroup>
     <Reference Include="XLua.Runtime">
-      <HintPath>$(SolutionDir)References\XLua.Runtime.dll</HintPath>
+      <HintPath>$(MSBuildThisFileDirectory)..\References\XLua.Runtime.dll</HintPath>
       <Private>false</Private>
     </Reference>
     <Reference Include="AC.Lua">
-      <HintPath>$(SolutionDir)References\AC.Lua.dll</HintPath>
+      <HintPath>$(MSBuildThisFileDirectory)..\References\AC.Lua.dll</HintPath>
       <Private>false</Private>
     </Reference>
   </ItemGroup>
@@ -30,12 +30,12 @@
   <Target Name="Copy to BepInEx" AfterTargets="Build">
     <Copy
       SourceFiles="$(OutputPath)$(AssemblyName).dll"
-      DestinationFolder="$(SolutionDir)BepInEx\plugins\"
+      DestinationFolder="$(MSBuildThisFileDirectory)..\BepInEx\plugins\"
       OverwriteReadOnlyFiles="true"
     />
     <Message
       Importance="high"
-      Text="$(AssemblyName).dll deployed to $(SolutionDir)BepInEx\plugins\"
+      Text="$(AssemblyName).dll deployed to $(MSBuildThisFileDirectory)..\BepInEx\plugins\"
     />
   </Target>
 </Project>

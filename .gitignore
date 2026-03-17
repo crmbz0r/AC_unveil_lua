@@ -57,3 +57,6 @@ AC_unveil_lua.code-workspace2.code-workspace
 .specstory/.what-is-this.md
 /AC_LuaContent/old
 /BepInEx
+.github/copilot-instructions.md
+/.specstory
+/release

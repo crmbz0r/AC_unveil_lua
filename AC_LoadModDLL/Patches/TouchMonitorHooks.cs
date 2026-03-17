@@ -9,6 +9,8 @@ namespace AiComi_LuaMod;
 //  Touch Monitor Hooks
 //  Captures private TouchController fields into public statics
 //  so Lua can read them via CS.AiComi_LuaMod.TouchMonitorHooks
+//  Tis file is basically just a requirement for the
+//  touch_monitor.lua script to show all of the monitored data.
 // ─────────────────────────────────────────────────────────────
 [HarmonyPatch]
 public static class TouchMonitorHooks

@@ -161,11 +161,14 @@ public class LuaConsole : MonoBehaviour
         GUI.SetNextControlName("LuaInput");
         _input = GUILayout.TextArea(_input, _styleInput!, GUILayout.Height(INPUT_H));
 
-        var e = Event.current;
-        if (e.type == EventType.KeyDown && e.keyCode == KeyCode.Return && e.control)
+        // Fix: Handle Ctrl+Enter regardless of input field focus
+        if (Input.GetKeyDown(KeyCode.Return) && (Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)))
         {
-            Execute();
-            e.Use();
+            // Only execute if the input field is focused or no other UI element has focus
+            if (GUI.GetNameOfFocusedControl() == "LuaInput" || GUI.GetNameOfFocusedControl() == "")
+            {
+                Execute();
+            }
         }
 
         GUI.DragWindow(new Rect(0, 0, _consoleRect.width, 20));
@@ -492,7 +495,7 @@ public class LuaConsole : MonoBehaviour
         float totalW = charW * text.Length;
 
         _marqueeOffset += MARQUEE_SPEED * Time.deltaTime;
-        if (_marqueeOffset > totalW + area.width)
+        if (_marqueeOffset > totalW)
             _marqueeOffset = 0f;
 
         float speed = 0.4f;
@@ -500,20 +503,27 @@ public class LuaConsole : MonoBehaviour
         float startX = area.width - _marqueeOffset;
 
         GUI.BeginGroup(new Rect(area.x, area.y, area.width, area.height));
-        for (int i = 0; i < text.Length; i++)
+        
+        // Draw text twice for seamless scrolling: once at current position, once offset by total width
+        for (int pass = 0; pass < 2; pass++)
         {
-            float xPos = startX + i * charW;
-            if (xPos > -charW && xPos < area.width)
+            float offsetX = pass == 0 ? 0f : -totalW;
+            
+            for (int i = 0; i < text.Length; i++)
             {
-                float hue = ((i * wave - Time.realtimeSinceStartup * speed) % 1f);
-                if (hue < 0)
-                    hue += 1f;
-                _styleRainbow.normal.textColor = Color.HSVToRGB(hue, 1f, 1f);
-                GUI.Label(
-                    new Rect(xPos, 2f, charW + 2f, area.height - 2f),
-                    text[i].ToString(),
-                    _styleRainbow
-                );
+                float xPos = startX + i * charW + offsetX;
+                if (xPos > -charW && xPos < area.width)
+                {
+                    float hue = ((i * wave - Time.realtimeSinceStartup * speed) % 1f);
+                    if (hue < 0)
+                        hue += 1f;
+                    _styleRainbow.normal.textColor = Color.HSVToRGB(hue, 1f, 1f);
+                    GUI.Label(
+                        new Rect(xPos, 2f, charW + 2f, area.height - 2f),
+                        text[i].ToString(),
+                        _styleRainbow
+                    );
+                }
             }
         }
         GUI.EndGroup();
